@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generation</title>
+    <!-- Include jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <h1>PDF Generation Example</h1>
+    
+    <button onclick="generatePDF()">Generate PDF</button>
+
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf; // Note: Use window.jspdf in the browser environment
+            const doc = new jsPDF();
+
+            // Add longer text to the PDF
+            var longText = "There’s also a range of “takes” on Christmas in these stories: from traditional Christmas stories to fantastical, funny and humorous to serious or sweet. And I’ve included New Year’s stories as well, since Christmas was historically seen as a twelve-day period, beginning on December 25th and ending on January 5th, or Twelfth Night. You can read these Christmas stories online for free, print them out, or download them for free to your e-reader. Some include illustrations as well! If you prefer to listen to these Christmas stories, you’ll also find a link to the audio version, if available";
+            var splitText = doc.splitTextToSize(longText, 180); // Adjust the width as needed
+
+            doc.text(splitText, 10, 30); // Adjust the x, y coordinates as needed
+
+            doc.save("product-details.pdf");
+        }
+    </script>
+
+</body>
+</html>
