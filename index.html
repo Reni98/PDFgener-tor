@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generátor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<form id="productForm">
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" required>
+
+    <label for="productDescription">Product Description:</label>
+    <textarea id="productDescription" required></textarea>
+
+    <label for="productPrice">Product Price:</label>
+    <input type="text" id="productPrice" required>
+
+    <button type="button" onclick="generatePDF()">Generate PDF</button>
+</form>
+
+<form id="pdfForm">
+    <label for="textInput">Adja meg a szöveget:</label>
+    <input type="text" id="textInput" name="textInput" required>
+    <button type="button" onclick="generatePDF()">Generálás</button>
+</form>
+<body>
+    <script>
+      function generatePDF() {
+    const { jsPDF } = jspdf;
+    const doc = new jsPDF();
+
+   
+    //A termék adatainak megadása form-on keresztül
+    const productName = document.getElementById('productName').value;
+    const productDescription = document.getElementById('productDescription').value;
+    const productPrice = document.getElementById('productPrice').value;
+
+    //cella mérétenék és poziciójának beállítása
+    const cellWidth = 50;
+    const cellHeight = 10;
+    const startX = (doc.internal.pageSize.width - 3 * cellWidth) / 2; // Centered on the page
+    const startY = 40;
+
+   //Az első sor stílusának beállítása
+    doc.setFont("bold");
+    doc.setLineWidth(1.5);
+
+   //Szegély megadása az első sornak
+    doc.rect(startX, startY, cellWidth, cellHeight);
+    doc.rect(startX + cellWidth, startY, cellWidth, cellHeight);
+    doc.rect(startX + 2 * cellWidth, startY, cellWidth, cellHeight);
+
+    //Szöveg szegéllyes
+    doc.text("Product Name", startX + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
+    doc.text("Product Description", startX + cellWidth + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
+    doc.text("Product Price", startX + 2 * cellWidth + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
+
+  
+    doc.setFont("normal");
+    doc.setLineWidth(0.5);
+
+    
+    doc.rect(startX, startY + cellHeight, cellWidth, cellHeight);
+    doc.rect(startX + cellWidth, startY + cellHeight, cellWidth, cellHeight);
+    doc.rect(startX + 2 * cellWidth, startY + cellHeight, cellWidth, cellHeight);
+
+    
+    doc.text(productName, startX + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
+    doc.text(productDescription, startX + cellWidth + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
+    doc.text(productPrice, startX + 2 * cellWidth + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
+
+   
+    doc.save("product-details.pdf");
+}
+
+
+    
+    </script>
+</body>
+</html>
