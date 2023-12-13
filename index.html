@@ -12,7 +12,7 @@
     <input type="text" id="productName" required>
 
     <label for="productDescription">Product Description:</label>
-    <textarea id="productDescription" required></textarea>
+    <textarea id="productBrand" required></textarea>
 
     <label for="productPrice">Product Price:</label>
     <input type="text" id="productPrice" required>
@@ -20,11 +20,7 @@
     <button type="button" onclick="generatePDF()">Generate PDF</button>
 </form>
 
-<form id="pdfForm">
-    <label for="textInput">Adja meg a szöveget:</label>
-    <input type="text" id="textInput" name="textInput" required>
-    <button type="button" onclick="generatePDF()">Generálás</button>
-</form>
+
 <body>
     <script>
       function generatePDF() {
@@ -38,7 +34,7 @@
    
     //A termék adatainak megadása form-on keresztül
     const productName = document.getElementById('productName').value;
-    const productDescription = document.getElementById('productDescription').value;
+    const productDescription = document.getElementById('productBrand').value;
     const productPrice = document.getElementById('productPrice').value;
 
     //cella mérétenék és poziciójának beállítása
@@ -58,7 +54,7 @@
 
     //Szöveg szegéllyes
     doc.text("Product Name", startX + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
-    doc.text("Product Description", startX + cellWidth + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
+    doc.text("Product Brand", startX + cellWidth + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
     doc.text("Product Price", startX + 2 * cellWidth + cellWidth / 2, startY + cellHeight / 2, { align: "center" });
 
   
@@ -72,7 +68,7 @@
 
     
     doc.text(productName, startX + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
-    doc.text(productDescription, startX + cellWidth + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
+    doc.text(productBrand, startX + cellWidth + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
     doc.text(productPrice, startX + 2 * cellWidth + cellWidth / 2, startY + 1.5 * cellHeight, { align: "center" });
 
    
